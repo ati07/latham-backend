@@ -25,7 +25,7 @@ const rdrSchema = mongoose.Schema(
     delfection_eligible_flag: { type: String },
     amount: { type: String },
     currency: { type: String },
-    transation_request_id: { type: String },
+    transaction_request_id: { type: String },
     card_bin: { type: String },
     card_last_four: { type: String },
 },

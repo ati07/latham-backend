@@ -53,7 +53,7 @@ export const createRdr = tryCatch(async (req, res) => {
     delfection_eligible_flag,
     amount,
     currency,
-    transation_request_id,
+    transaction_request_id,
     card_bin,
     card_last_four,
    } = req.body;
@@ -81,7 +81,7 @@ export const createRdr = tryCatch(async (req, res) => {
     delfection_eligible_flag,
     amount,
     currency,
-    transation_request_id,
+    transaction_request_id,
     card_bin,
     card_last_four,
    });

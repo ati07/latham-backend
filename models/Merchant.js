@@ -11,7 +11,7 @@ const merchantSchema = mongoose.Schema(
         type: String,
         min: 5,
         max: 50,
-        required: false,
+        required: true,
         unique: true,
         trim: true
     },
