@@ -3,7 +3,7 @@ import tryCatch from './utils/tryCatch.js';
 
 export const createMerchant = tryCatch(async (req, res) => {
     // console.log("req",req.body)
-  const { id: uid, merchant,
+  const { merchant,
     client,
     descriptor,
     rdrtier,
@@ -17,6 +17,7 @@ export const createMerchant = tryCatch(async (req, res) => {
     mid,
     etocastatus,
     ethocalimit } = req.body;
+    // console.log("object",req.body);
   const newMerchant = new Merchant({ 
     // ...req.body, 
     merchant,
