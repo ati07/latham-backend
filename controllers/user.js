@@ -34,6 +34,7 @@ export const register = tryCatch(async (req, res) => {
 });
 
 export const login = tryCatch(async (req, res) => {
+  console.log('req.body',req.body)
   const { email, password } = req.body;
 
   const emailLowerCase = email.toLowerCase();

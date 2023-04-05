@@ -2,7 +2,7 @@ import Merchant from '../models/Merchant.js';
 import tryCatch from './utils/tryCatch.js';
 
 export const createMerchant = tryCatch(async (req, res) => {
-    console.log("req",req.body)
+    // console.log("req",req.body)
   const { merchant,
     client,
     descriptor,

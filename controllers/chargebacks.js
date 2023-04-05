@@ -13,8 +13,10 @@ export const createChargebacks = tryCatch(async (req, res) => {
     acquirer,
     due_date,
     card_number,
-    amount } = req.user;
-  const newChargebacks = new Chargebacks({ merchant,
+    amount } = req.body;
+  const newChargebacks = new Chargebacks({ 
+    ...req.body.data,
+    merchant,
     client,
     descriptor,
     issuer,
