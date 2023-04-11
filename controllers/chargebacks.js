@@ -1,4 +1,5 @@
 import Chargebacks from '../models/Chargebacks.js';
+import Merchant from '../models/Merchant.js';
 import tryCatch from './utils/tryCatch.js';
 
 export const createChargebacks = tryCatch(async (req, res) => {
@@ -6,35 +7,36 @@ export const createChargebacks = tryCatch(async (req, res) => {
     client,
     descriptor,
     issuer,
-    trans_date,
+    file_date,
     mid,
     cb_code,
     transation_id,
     acquirer,
     due_date,
     card_number,
-    amount } = req.body;
+    amount,status } = req.body;
   const newChargebacks = new Chargebacks({ 
     ...req.body.data,
     merchant,
     client,
     descriptor,
     issuer,
-    trans_date,
+    file_date,
     mid,
     cb_code,
     transation_id,
     acquirer,
     due_date,
     card_number,
-    amount });
+    amount,status });
   await newChargebacks.save();
   res.status(201).json({ success: true, result: newChargebacks });
 });
 
 export const getChargebacks = tryCatch(async (req, res) => {
   const chargebacks = await Chargebacks.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: chargebacks });
+  const merchant = await Merchant.find().sort({ _id: -1 });
+  res.status(200).json({ success: true, result: chargebacks, merchants:merchant, });
 });
 
 export const deleteChargebacks = tryCatch(async (req, res) => {

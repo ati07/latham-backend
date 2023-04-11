@@ -6,7 +6,7 @@ const chargebacksSchema = mongoose.Schema(
     client: { type: String },
     descriptor: { type: String },
     issuer: { type: String },
-    trans_date: { type: String },
+    file_date: { type: String },
     mid:{ type: String },
     cb_code: { type: String },
     transation_id: { type: String },
@@ -14,6 +14,7 @@ const chargebacksSchema = mongoose.Schema(
     due_date: { type: String },
     card_number: { type: String },
     amount: { type: String },
+    status:{type: String}
 },
     { timestamps: true }
 )

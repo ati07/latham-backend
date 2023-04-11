@@ -1,3 +1,4 @@
+import Merchant from '../models/Merchant.js';
 import Rdr from '../models/Rdr.js';
 import tryCatch from './utils/tryCatch.js';
 // {
@@ -91,7 +92,8 @@ export const createRdr = tryCatch(async (req, res) => {
 
 export const getRdr = tryCatch(async (req, res) => {
   const rdr = await Rdr.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: rdr });
+  const merchant = await Merchant.find().sort({ _id: -1 });
+  res.status(200).json({ success: true, result: rdr,merchants: merchant });
 });
 
 export const deleteRdr = tryCatch(async (req, res) => {

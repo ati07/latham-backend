@@ -1,4 +1,5 @@
 import Ethoca from '../models/Ethoca.js';
+import Merchant from '../models/Merchant.js';
 import tryCatch from './utils/tryCatch.js';
 
 export const createEthoca = tryCatch(async (req, res) => {
@@ -46,7 +47,8 @@ export const createEthoca = tryCatch(async (req, res) => {
 
 export const getEthoca = tryCatch(async (req, res) => {
   const ethoca = await Ethoca.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: ethoca });
+  const merchant = await Merchant.find().sort({ _id: -1 });
+  res.status(200).json({ success: true, result: ethoca,merchants:merchant });
 });
 
 export const deleteEthoca = tryCatch(async (req, res) => {
