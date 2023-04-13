@@ -7,6 +7,7 @@ import merchantRouter from './routes/merchantRouter.js';
 import rdrRouter from './routes/rdrRouter.js';
 import ethocaRouter from './routes/ethocaRouter.js';
 import chargebacksRouter from './routes/chargebacksRouter.js';
+import dashboardRouter from './routes/dashboardRouter.js';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use('/merchant', merchantRouter);
 app.use('/rdr',rdrRouter)
 app.use('/ethoca',ethocaRouter)
 app.use('/chargebacks',chargebacksRouter)
+app.use('/getdashboard',dashboardRouter)
 
 app.use('/room', roomRouter);
 app.get('/', (req, res) => res.json({ message: 'Welcome to our API' }));

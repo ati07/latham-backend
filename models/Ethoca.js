@@ -16,7 +16,7 @@ const ethocaSchema = mongoose.Schema(
         bin: { type: String },
         alert_date: { type: String },
         card_number: { type: String },
-        transation_id: { type: String },
+        transaction_id: { type: String },
         alert_type: { type: String },
         alert_date_time: { type: String },
         amount: { type: String },
