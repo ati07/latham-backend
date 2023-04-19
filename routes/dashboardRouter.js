@@ -6,6 +6,6 @@ import {
 import auth from '../middleware/auth.js';
 
 const dashboardRouter = Router();
-dashboardRouter.get('/',auth, getDashboardData);
+dashboardRouter.post('/',auth, getDashboardData);
 
 export default dashboardRouter;
