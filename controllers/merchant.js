@@ -1,3 +1,4 @@
+import Client from '../models/Client.js';
 import Merchant from '../models/Merchant.js';
 import tryCatch from './utils/tryCatch.js';
 
@@ -39,8 +40,9 @@ export const createMerchant = tryCatch(async (req, res) => {
 });
 
 export const getMerchant = tryCatch(async (req, res) => {
+  const client = await Client.find().sort({ _id: -1 });
   const merchant = await Merchant.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: merchant });
+  res.status(200).json({ success: true, result: merchant, clients: client });
 });
 
 export const deleteMerchant = tryCatch(async (req, res) => {

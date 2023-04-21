@@ -1,4 +1,5 @@
 import Chargebacks from '../models/Chargebacks.js';
+import Client from '../models/Client.js';
 import Ethoca from '../models/Ethoca.js';
 import Rdr from '../models/Rdr.js';
 import tryCatch from './utils/tryCatch.js';
@@ -10,6 +11,7 @@ export const getDashboardData = tryCatch(async (req, res) => {
   // console.log('reqDash', JSON.parse(req.body.current))
   const data = JSON.parse(req.body.current)
   // console.log('chargebacksDarre', new Date(data.end_date))
+  const client = await Client.find().sort({ _id: -1 });
   const chargebacks = await Chargebacks.find({
     createdAt: { $gte: new Date(data.start_date), $lte: new Date(data.end_date) }
   }).sort({ _id: -1 });
@@ -61,7 +63,8 @@ export const getDashboardData = tryCatch(async (req, res) => {
       PotentialRevenueLoss: potentialRevenueLoss,
       TotalCases: TotalClosedCases,
       Percentage: Percentage,
-      LostRevenueAndFines: lostRevenueAndFines
+      LostRevenueAndFines: lostRevenueAndFines,
+      clients:client
     }
   });
 

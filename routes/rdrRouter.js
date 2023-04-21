@@ -19,8 +19,7 @@ rdrRouter.delete(
 //   checkAccess(rdrPermissions.delete),
   deleteRdr
 );
-rdrRouter.put(
-  '/:rdrId',
+rdrRouter.put('/:rdrId',
   auth,
 //   checkAccess(rdrPermissions.update),
   updateRdr

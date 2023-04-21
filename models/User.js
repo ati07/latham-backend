@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-
+// enum: ['basic', 'editor', 'admin'],
+// 
 const userSchema = mongoose.Schema(
   {
     name: { type: String, min: 2, max: 50, required: true },
@@ -14,11 +15,14 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     photoURL: { type: String, default: '' },
     role: {
-      type: 'String',
+      type: String,
       default: 'basic',
-      enum: ['basic', 'editor', 'admin'],
+      enum: ['User','Admin'],
     },
     active: { type: Boolean, default: true },
+    dateCreated: {type:String,default: ''},
+    client: {type:String,default:''}
+
   },
   { timestamps: true }
 );

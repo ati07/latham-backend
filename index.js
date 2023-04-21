@@ -8,6 +8,7 @@ import rdrRouter from './routes/rdrRouter.js';
 import ethocaRouter from './routes/ethocaRouter.js';
 import chargebacksRouter from './routes/chargebacksRouter.js';
 import dashboardRouter from './routes/dashboardRouter.js';
+import clientRouter from './routes/clientRouter.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use('/user', userRouter);
 app.use('/merchant', merchantRouter);
+app.use('/client', clientRouter);
 app.use('/rdr',rdrRouter)
 app.use('/ethoca',ethocaRouter)
 app.use('/chargebacks',chargebacksRouter)
