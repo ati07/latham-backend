@@ -9,7 +9,7 @@ const chargebacksSchema = mongoose.Schema(
     file_date: { type: String },
     mid:{ type: String },
     cb_code: { type: String },
-    transation_id: { type: String },
+    transaction_id: { type: String },
     acquirer: { type: String },
     due_date: { type: String },
     card_number: { type: String },
