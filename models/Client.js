@@ -4,14 +4,12 @@ const clientSchema = mongoose.Schema(
 {
     merchant: [],
     name: { type: String },
-    last_name: { type: String },
+    phone_number: { type: String },
     company: { type: String },
     email: {
         type: String,
         min: 5,
         max: 50,
-        required: true,
-        unique: true,
         trim: true
     },
    

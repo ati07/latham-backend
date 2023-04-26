@@ -14,7 +14,8 @@ export const createMerchant = tryCatch(async (req, res) => {
     midlive,
     acquirer,
     rdrstatus,
-    bin,
+    visa_bin,
+    mc_bin,
     mid,
     etocastatus,
     ethocalimit } = req.body;
@@ -31,7 +32,8 @@ export const createMerchant = tryCatch(async (req, res) => {
     midlive,
     acquirer,
     rdrstatus,
-    bin,
+    visa_bin,
+    mc_bin,
     mid,
     etocastatus,
     ethocalimit });

@@ -11,15 +11,14 @@ const merchantSchema = mongoose.Schema(
         type: String,
         min: 5,
         max: 50,
-        required: true,
-        unique: true,
         trim: true
     },
     caid: { type: String },
     midlive: { type: String },
     acquirer: { type: String },
     rdrstatus: { type: String },
-    bin: { type: String },
+    visa_bin: { type: String },
+    mc_bin: { type: String },
     mid: { type: String },
     etocastatus: { type: String },
     ethocalimit: { type: String }

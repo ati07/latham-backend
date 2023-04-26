@@ -7,7 +7,7 @@ export const createClient = tryCatch(async (req, res) => {
   const { 
     merchant,
     name,
-    last_name,
+    phone_number,
     company,
     email,
     } = req.body;
@@ -16,7 +16,7 @@ export const createClient = tryCatch(async (req, res) => {
     ...req.body.data, 
     merchant,
     name,
-    last_name,
+    phone_number,
     email,
     company });
   await newClient.save();

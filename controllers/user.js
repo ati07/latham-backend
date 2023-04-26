@@ -6,7 +6,7 @@ import Room from '../models/Room.js';
 import Client from '../models/Client.js';
 
 export const register = tryCatch(async (req, res) => {
-  const { name, email, password, client, role, dateCreated } = req.body;
+  const { name, email, password, client, role } = req.body;
   if (password.length < 6)
     return res.status(400).json({
       success: false,
@@ -25,8 +25,7 @@ export const register = tryCatch(async (req, res) => {
     email: emailLowerCase,
     password: hashedPassword,
     client,
-    role,
-    dateCreated
+    role
   });
   const { _id: id, photoURL, active, } = user;
   const token = jwt.sign({ id, name, photoURL, role }, process.env.JWT_SECRET, {
@@ -34,7 +33,7 @@ export const register = tryCatch(async (req, res) => {
   });
   res.status(201).json({
     success: true,
-    result: { id, name, email: user.email, photoURL, token, role, active, dateCreated:user.dateCreated, user:user.client },
+    result: { id, name, email: user.email, photoURL, token, role, active, user:user.client },
   });
 });
 
@@ -74,10 +73,27 @@ export const updateUser = tryCatch(async (req, res) => {
   //   req.body,
   //   { new: true }
   // );
+  // console.log('req',req.body)
+  const { name, email, password, client, role } = req.body;
+  if (password.length < 6)
+    return res.status(400).json({
+      success: false,
+      message: 'Password must be 6 characters or more',
+    });
+  const emailLowerCase = email.toLowerCase();
+  const hashedPassword = await bcrypt.hash(password, 12);
+  const data ={
+    name,
+    email: emailLowerCase,
+    password: hashedPassword,
+    client,
+    role
+  }
+  // req.body
   const updatedUser = await User.updateOne(
     {_id:req.params.userId},
     {
-      $set:req.body
+      $set:data
     })
   res.status(200).json({ success: true, result: updatedUser });
 });
