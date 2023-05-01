@@ -9,7 +9,15 @@ import ethocaRouter from './routes/ethocaRouter.js';
 import chargebacksRouter from './routes/chargebacksRouter.js';
 import dashboardRouter from './routes/dashboardRouter.js';
 import clientRouter from './routes/clientRouter.js';
+import cronRouter from './routes/cronRouter.js';
+import { updateChargebackStatus } from './controllers/cron.js';
+import cron from 'node-cron'
+// var cron = require('node-cron');
 
+cron.schedule('* * * * *', () => {
+  console.log('running a task every minute');
+  updateChargebackStatus()
+});
 dotenv.config();
 
 const port = process.env.PORT || 5000;
@@ -37,6 +45,7 @@ app.use('/rdr',rdrRouter)
 app.use('/ethoca',ethocaRouter)
 app.use('/chargebacks',chargebacksRouter)
 app.use('/getdashboard',dashboardRouter)
+app.use('/updatestatus',cronRouter)
 
 app.use('/room', roomRouter);
 app.get('/', (req, res) => res.json({ message: 'Welcome to our API' }));
