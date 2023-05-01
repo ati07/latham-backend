@@ -14,8 +14,8 @@ import { updateChargebackStatus } from './controllers/cron.js';
 import cron from 'node-cron'
 // var cron = require('node-cron');
 
-cron.schedule('* * * * *', () => {
-  console.log('running a task every minute');
+cron.schedule('* 23 * * *', () => {
+  // console.log('running a task every minute');
   updateChargebackStatus()
 });
 dotenv.config();
