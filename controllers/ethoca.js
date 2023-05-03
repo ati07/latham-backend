@@ -1,10 +1,11 @@
 import Client from '../models/Client.js';
+import DBA from '../models/DBA.js';
 import Ethoca from '../models/Ethoca.js';
 import Merchant from '../models/Merchant.js';
 import tryCatch from './utils/tryCatch.js';
 
 export const createEthoca = tryCatch(async (req, res) => {
-  const { id: uid,merchant,
+  const { id: uid,dba,merchant,
     client,
     descriptor,
     issuer,
@@ -23,7 +24,7 @@ export const createEthoca = tryCatch(async (req, res) => {
     alert_date_time,
     amount,
     cb_code } = req.body;
-  const newEthoca = new Ethoca({ merchant,
+  const newEthoca = new Ethoca({ dba,merchant,
     client,
     descriptor,
     issuer,
@@ -50,7 +51,8 @@ export const getEthoca = tryCatch(async (req, res) => {
   const ethoca = await Ethoca.find().sort({ _id: -1 });
   const client = await Client.find().sort({ _id: -1 });
   const merchant = await Merchant.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: ethoca,merchants:merchant, clients:client });
+  const dba = await DBA.find().sort({ _id: -1 });
+  res.status(200).json({ success: true, result: ethoca,merchants:merchant, clients:client,dbas:dba });
 });
 
 export const deleteEthoca = tryCatch(async (req, res) => {

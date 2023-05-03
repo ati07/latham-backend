@@ -1,10 +1,11 @@
 import Chargebacks from '../models/Chargebacks.js';
 import Client from '../models/Client.js';
+import DBA from '../models/DBA.js';
 import Merchant from '../models/Merchant.js';
 import tryCatch from './utils/tryCatch.js';
 
 export const createChargebacks = tryCatch(async (req, res) => {
-  const { id: uid, merchant,
+  const { id: uid, dba,merchant,
     client,
     descriptor,
     issuer,
@@ -18,6 +19,7 @@ export const createChargebacks = tryCatch(async (req, res) => {
     amount,status } = req.body;
   const newChargebacks = new Chargebacks({ 
     ...req.body.data,
+    dba,
     merchant,
     client,
     descriptor,
@@ -38,7 +40,8 @@ export const getChargebacks = tryCatch(async (req, res) => {
   const chargebacks = await Chargebacks.find().sort({ _id: -1 });
   const merchant = await Merchant.find().sort({ _id: -1 });
   const client = await Client.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: chargebacks, merchants:merchant,clients:client });
+  const dba = await DBA.find().sort({ _id: -1 });
+  res.status(200).json({ success: true, result: chargebacks, merchants:merchant,clients:client,dbas:dba });
 });
 
 export const deleteChargebacks = tryCatch(async (req, res) => {

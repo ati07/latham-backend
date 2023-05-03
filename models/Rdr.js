@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const rdrSchema = mongoose.Schema(
 {
+    dba: { type: String },
     merchant: { type: String },
     client: { type: String },
     lookup_source_type: { type: String },

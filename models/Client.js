@@ -8,9 +8,9 @@ const clientSchema = mongoose.Schema(
     company: { type: String },
     email: {
         type: String,
-        min: 5,
-        max: 50,
-        trim: true
+        // min: 5,
+        // max: 50,
+        // trim: true
     },
    
 },

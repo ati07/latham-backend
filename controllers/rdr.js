@@ -1,4 +1,5 @@
 import Client from '../models/Client.js';
+import DBA from '../models/DBA.js';
 import Merchant from '../models/Merchant.js';
 import Rdr from '../models/Rdr.js';
 import tryCatch from './utils/tryCatch.js';
@@ -32,6 +33,7 @@ import tryCatch from './utils/tryCatch.js';
 // }
 export const createRdr = tryCatch(async (req, res) => {
   const { id: uid, 
+    dba,
     merchant,
     client,
     lookup_source_type,
@@ -60,6 +62,7 @@ export const createRdr = tryCatch(async (req, res) => {
     card_last_four,
    } = req.body;
   const newrdr = new Rdr({
+    dba,
     merchant,
     client,
     lookup_source_type,
@@ -95,7 +98,8 @@ export const getRdr = tryCatch(async (req, res) => {
   const rdr = await Rdr.find().sort({ _id: -1 });
   const merchant = await Merchant.find().sort({ _id: -1 });
   const client = await Client.find().sort({ _id: -1 });
-  res.status(200).json({ success: true, result: rdr,merchants: merchant,clients:client });
+  const dba = await DBA.find().sort({ _id: -1 });
+  res.status(200).json({ success: true, result: rdr,merchants: merchant,clients:client,dbas:dba });
 });
 
 export const deleteRdr = tryCatch(async (req, res) => {

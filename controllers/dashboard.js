@@ -1,5 +1,6 @@
 import Chargebacks from '../models/Chargebacks.js';
 import Client from '../models/Client.js';
+import DBA from '../models/DBA.js';
 import Ethoca from '../models/Ethoca.js';
 import Merchant from '../models/Merchant.js';
 import Rdr from '../models/Rdr.js';
@@ -13,7 +14,8 @@ export const getDashboardData = tryCatch(async (req, res) => {
   const data = JSON.parse(req.body.current)
   // console.log('chargebacksDarre', new Date(data.end_date))
   let client;
-  let merchant
+  let merchant;
+  let dba;
   let chargebacks;
   let wonChargebacks
   let inProcessChargebacks
@@ -27,10 +29,11 @@ export const getDashboardData = tryCatch(async (req, res) => {
     && data.end_date 
     && req.body.client
     && req.body.merchants
-    && req.body.mids
+    && req.body.dbas
     ) {
               client = await Client.find().sort({ _id: -1 });
               merchant = await Merchant.find().sort({ _id: -1 });
+              dba = await DBA.find().sort({ _id: -1 });
               let findChargebackData = {
                 createdAt: { $gte: new Date(data.start_date), $lte: new Date(data.end_date) }
               }
@@ -68,17 +71,28 @@ export const getDashboardData = tryCatch(async (req, res) => {
                 findethoca['merchant'] = {$in:req.body.merchants}
                 findrdr['merchant'] = {$in:req.body.merchants}
               }
-              if(!req.body.mids.includes('all')) {
-                findChargebackData['mid'] = {$in:req.body.mids}
-                findwonChargebacks['mid'] = {$in:req.body.mids}
-                findinProcessChargebacks['mid'] = {$in:req.body.mids}
-                findopenCases['mid'] = {$in:req.body.mids}
-                findclosedCases['mid'] = {$in:req.body.mids}
-                findurgentActionRequired['mid'] = {$in:req.body.mids}
-                findexpired['mid'] = {$in:req.body.mids}
-                findethoca['mid'] = {$in:req.body.mids}
-                findrdr['mid'] = {$in:req.body.mids}
+              if(!req.body.dbas.includes('all')) {
+                findChargebackData['dba'] = {$in:req.body.dbas}
+                findwonChargebacks['dba'] = {$in:req.body.dbas}
+                findinProcessChargebacks['dba'] = {$in:req.body.dbas}
+                findopenCases['dba'] = {$in:req.body.dbas}
+                findclosedCases['dba'] = {$in:req.body.dbas}
+                findurgentActionRequired['dba'] = {$in:req.body.dbas}
+                findexpired['dba'] = {$in:req.body.dbas}
+                findethoca['dba'] = {$in:req.body.dbas}
+                findrdr['dba'] = {$in:req.body.dbas}
               }
+              // if(!req.body.dbas==='all') {
+              //   findChargebackData['dba'] = req.body.dbas
+              //   findwonChargebacks['dba'] = req.body.dbas
+              //   findinProcessChargebacks['dba'] = req.body.dbas
+              //   findopenCases['dba'] = req.body.dbas
+              //   findclosedCases['dba'] = req.body.dbas
+              //   findurgentActionRequired['dba'] = req.body.dbas
+              //   findexpired['dba'] = req.body.dbas
+              //   findethoca['dba'] = req.body.dbas
+              //   findrdr['dba'] = req.body.dbas
+              // }
               
               chargebacks = await Chargebacks.find(findChargebackData).sort({ _id: -1 });
               // console.log('chargebacks', chargebacks)
@@ -129,7 +143,8 @@ export const getDashboardData = tryCatch(async (req, res) => {
       Percentage: Percentage,
       LostRevenueAndFines: lostRevenueAndFines,
       clients: client,
-      merchants:merchant
+      merchants:merchant,
+      dbas:dba
     }
   });
 

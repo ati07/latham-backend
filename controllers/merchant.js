@@ -6,37 +6,18 @@ export const createMerchant = tryCatch(async (req, res) => {
     // console.log("req",req.body)
   const { merchant,
     client,
-    descriptor,
-    rdrtier,
-    mcc,
+    name,
+    phone_number,
     email,
-    caid,
-    midlive,
-    acquirer,
-    rdrstatus,
-    visa_bin,
-    mc_bin,
-    mid,
-    etocastatus,
-    ethocalimit } = req.body;
+   } = req.body;
     // console.log("object",req.body);
   const newMerchant = new Merchant({ 
     ...req.body.data, 
     merchant,
     client,
-    descriptor,
-    rdrtier,
-    mcc,
     email,
-    caid,
-    midlive,
-    acquirer,
-    rdrstatus,
-    visa_bin,
-    mc_bin,
-    mid,
-    etocastatus,
-    ethocalimit });
+    name,
+    phone_number });
   await newMerchant.save();
   res.status(201).json({ success: true, result: newMerchant });
 });

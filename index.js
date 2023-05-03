@@ -12,6 +12,7 @@ import clientRouter from './routes/clientRouter.js';
 import cronRouter from './routes/cronRouter.js';
 import { updateChargebackStatus } from './controllers/cron.js';
 import cron from 'node-cron'
+import dbaRouter from './routes/dbaRouter.js';
 // var cron = require('node-cron');
 
 cron.schedule('* 23 * * *', () => {
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use('/user', userRouter);
 app.use('/merchant', merchantRouter);
+app.use('/dba', dbaRouter);
 app.use('/client', clientRouter);
 app.use('/rdr',rdrRouter)
 app.use('/ethoca',ethocaRouter)

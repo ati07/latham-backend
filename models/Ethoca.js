@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const ethocaSchema = mongoose.Schema(
     {
+        dba: { type: String },
         merchant: { type: String },
         client: { type: String },
         descriptor: { type: String },
