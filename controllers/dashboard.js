@@ -49,7 +49,7 @@ export const getDashboardData = tryCatch(async (req, res) => {
               let findrdr={
                 createdAt: { $gte: new Date(data.start_date), $lte: new Date(data.end_date) }
               }
-              if(!req.body.client.includes('all')) {
+              if(!req.body.client.includes('All')) {
                 findChargebackData['client'] = {$in:req.body.client}
                 findwonChargebacks['client'] = {$in:req.body.client}
                 findinProcessChargebacks['client'] = {$in:req.body.client}
@@ -60,7 +60,7 @@ export const getDashboardData = tryCatch(async (req, res) => {
                 findethoca['client'] = {$in:req.body.client}
                 findrdr['client'] = {$in:req.body.client}
               }
-              if(!req.body.merchants.includes('all')) {
+              if(!req.body.merchants.includes('All')) {
                 findChargebackData['merchant'] = {$in:req.body.merchants}
                 findwonChargebacks['merchant'] = {$in:req.body.merchants}
                 findinProcessChargebacks['merchant'] = {$in:req.body.merchants}
@@ -71,7 +71,7 @@ export const getDashboardData = tryCatch(async (req, res) => {
                 findethoca['merchant'] = {$in:req.body.merchants}
                 findrdr['merchant'] = {$in:req.body.merchants}
               }
-              if(!req.body.dbas.includes('all')) {
+              if(!req.body.dbas.includes('All')) {
                 findChargebackData['dba'] = {$in:req.body.dbas}
                 findwonChargebacks['dba'] = {$in:req.body.dbas}
                 findinProcessChargebacks['dba'] = {$in:req.body.dbas}

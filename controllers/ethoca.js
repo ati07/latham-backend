@@ -73,3 +73,16 @@ export const updateEthoca = tryCatch(async (req, res) => {
     })
   res.status(200).json({ success: true, result: updatedEthoca });
 });
+
+export const filterEthoca = tryCatch(async(req, res)=>{
+  let filterData = {}
+
+  if(!req.body.client.includes('All')) {
+    filterData['client'] = {$in:req.body.client}
+  }
+  if(!req.body.merchants.includes('All')) {
+    filterData['merchant'] = {$in:req.body.merchants}
+  }
+  const ethoca = await Ethoca.find(filterData).sort({ _id: -1 });
+  res.status(200).json({ success: true, result: ethoca });
+})

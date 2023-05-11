@@ -16,8 +16,8 @@ const userSchema = mongoose.Schema(
     photoURL: { type: String, default: '' },
     role: {
       type: String,
-      default: 'basic',
-      enum: ['User','Admin'],
+      default: 'User',
+      enum: ['User','Admin','Client'],
     },
     active: { type: Boolean, default: true },
     dateCreated: {type:String,default: ''},

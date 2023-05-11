@@ -3,6 +3,7 @@ import { Router } from 'express';
 import {
   createRdr,
   deleteRdr,
+  filterRdr,
   getRdr,
   updateRdr,
 } from '../controllers/rdr.js';
@@ -12,6 +13,7 @@ import checkAccess from '../middleware/checkAccess.js';
 // auth,
 const rdrRouter = Router();
 rdrRouter.post('/', auth,createRdr);
+rdrRouter.post('/filter/',auth, filterRdr);
 rdrRouter.get('/', getRdr);
 rdrRouter.delete(
   '/:rdrId',

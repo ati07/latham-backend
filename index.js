@@ -13,6 +13,7 @@ import cronRouter from './routes/cronRouter.js';
 import { updateChargebackStatus } from './controllers/cron.js';
 import cron from 'node-cron'
 import dbaRouter from './routes/dbaRouter.js';
+import { sendMail } from './controllers/mailer.js';
 // var cron = require('node-cron');
 
 cron.schedule('* 23 * * *', () => {
@@ -51,6 +52,7 @@ app.use('/updatestatus',cronRouter)
 
 app.use('/room', roomRouter);
 app.get('/', (req, res) => res.json({ message: 'Welcome to our API' }));
+app.get('/sendmail',sendMail)
 app.use((req, res) =>
   res.status(404).json({ success: false, message: 'Not Found' })
 );

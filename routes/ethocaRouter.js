@@ -3,6 +3,7 @@ import { Router } from 'express';
 import {
   createEthoca,
   deleteEthoca,
+  filterEthoca,
   getEthoca,
   updateEthoca,
 } from '../controllers/ethoca.js';
@@ -12,6 +13,7 @@ import checkAccess from '../middleware/checkAccess.js';
 // auth,
 const ethocaRouter = Router();
 ethocaRouter.post('/', auth,createEthoca);
+ethocaRouter.post('/filter/',auth, filterEthoca);
 ethocaRouter.get('/', getEthoca);
 ethocaRouter.delete(
   '/:ethocaId',

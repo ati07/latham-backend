@@ -68,3 +68,16 @@ export const updateDBA = tryCatch(async (req, res) => {
     })
   res.status(200).json({ success: true, result: updatedDBA });
 });
+
+export const filterDBA = tryCatch(async(req, res)=>{
+  let filterDbaData = {}
+
+  if(!req.body.client.includes('All')) {
+    filterDbaData['client'] = {$in:req.body.client}
+  }
+  if(!req.body.merchants.includes('All')) {
+    filterDbaData['merchant'] = {$in:req.body.merchants}
+  }
+  const dba = await DBA.find(filterDbaData).sort({ _id: -1 });
+  res.status(200).json({ success: true, result: dba });
+})

@@ -120,3 +120,16 @@ export const updateRdr = tryCatch(async (req, res) => {
     })
   res.status(200).json({ success: true, result: updatedrdr });
 });
+
+export const filterRdr = tryCatch(async(req, res)=>{
+  let filterData = {}
+
+  if(!req.body.client.includes('All')) {
+    filterData['client'] = {$in:req.body.client}
+  }
+  if(!req.body.merchants.includes('All')) {
+    filterData['merchant'] = {$in:req.body.merchants}
+  }
+  const rdr = await Rdr.find(filterData).sort({ _id: -1 });
+  res.status(200).json({ success: true, result: rdr });
+})

@@ -3,6 +3,7 @@ import { Router } from 'express';
 import {
   createChargebacks,
   deleteChargebacks,
+  filterChargebacks,
   getChargebacks,
   updateChargebacks,
 } from '../controllers/chargebacks.js';
@@ -12,6 +13,7 @@ import checkAccess from '../middleware/checkAccess.js';
 // auth,
 const chargebacksRouter = Router();
 chargebacksRouter.post('/', auth,createChargebacks);
+chargebacksRouter.post('/filter/',auth, filterChargebacks);
 chargebacksRouter.get('/', getChargebacks);
 chargebacksRouter.delete(
   '/:chargebacksId',

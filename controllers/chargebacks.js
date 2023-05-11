@@ -62,3 +62,16 @@ export const updateChargebacks = tryCatch(async (req, res) => {
     })
   res.status(200).json({ success: true, result: updatedChargebacks });
 });
+
+export const filterChargebacks = tryCatch(async(req, res)=>{
+  let filterData = {}
+
+  if(!req.body.client.includes('All')) {
+    filterData['client'] = {$in:req.body.client}
+  }
+  if(!req.body.merchants.includes('All')) {
+    filterData['merchant'] = {$in:req.body.merchants}
+  }
+  const chargebacks = await Chargebacks.find(filterData).sort({ _id: -1 });
+  res.status(200).json({ success: true, result: chargebacks });
+})

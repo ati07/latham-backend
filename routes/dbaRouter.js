@@ -3,6 +3,7 @@ import { Router } from 'express';
 import {
   createDBA,
   deleteDBA,
+  filterDBA,
   getDBA,
   updateDBA,
 } from '../controllers/DBA.js';
@@ -12,6 +13,7 @@ import checkAccess from '../middleware/checkAccess.js';
 // auth,
 const dbaRouter = Router();
 dbaRouter.post('/', auth,createDBA);
+dbaRouter.post('/filter/',auth, filterDBA);
 dbaRouter.get('/', getDBA);
 dbaRouter.delete(
   '/:dbaId',
