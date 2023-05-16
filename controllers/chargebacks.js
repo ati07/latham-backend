@@ -16,7 +16,7 @@ export const createChargebacks = tryCatch(async (req, res) => {
     acquirer,
     due_date,
     card_number,
-    amount,status } = req.body;
+    amount,status,country } = req.body;
   const newChargebacks = new Chargebacks({ 
     ...req.body.data,
     dba,
@@ -31,7 +31,7 @@ export const createChargebacks = tryCatch(async (req, res) => {
     acquirer,
     due_date,
     card_number,
-    amount,status });
+    amount,status,country });
   await newChargebacks.save();
   res.status(201).json({ success: true, result: newChargebacks });
 });

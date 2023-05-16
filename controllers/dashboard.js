@@ -6,7 +6,19 @@ import Merchant from '../models/Merchant.js';
 import Rdr from '../models/Rdr.js';
 import tryCatch from './utils/tryCatch.js';
 
-
+export const pickHighest = (obj, num = 1) => {
+  const requiredObj = {};
+  // if(num > Object.keys(obj).length){
+  //    return false;
+  // };
+  Object.keys(obj).sort((a, b) => obj[b] - obj[a]).forEach((key, ind) =>
+  {
+     if(ind < num){
+        requiredObj[key] = obj[key];
+     }
+  });
+  return requiredObj;
+};
 
 export const getDashboardData = tryCatch(async (req, res) => {
   // console.log('reqDash', JSON.parse(req.body.current))
@@ -106,6 +118,29 @@ export const getDashboardData = tryCatch(async (req, res) => {
               rdr = await Rdr.find(findrdr).sort({ _id: -1 });
 
   }
+// Find out chargebacks as per country
+  const numberOfCountry = chargebacks.map((i)=>i.country)
+  const  countryData = {}
+  const removedDuplicats = [...new Set(numberOfCountry)]
+  for (let i = 0; i < removedDuplicats.length; i++) {
+   countryData[removedDuplicats[i]]= chargebacks.filter((obj)=>obj.country === removedDuplicats[i]).length
+  }
+  // console.log("countryData",countryData)
+
+  // Find out number of cb_code 
+  const numberOfCode = chargebacks.map((i)=>i.cb_code)
+  const  codeData = {}
+  const removedDuplicatsCode = [...new Set(numberOfCode)]
+  for (let i = 0; i < removedDuplicatsCode.length; i++) {
+    codeData[removedDuplicatsCode[i]]= chargebacks.filter((obj)=>obj.cb_code === removedDuplicatsCode[i]).length
+  }
+  
+ const topCode = pickHighest(codeData,5)
+ const topCodeData =[]
+ for(let key in topCode){
+  topCodeData.push({name:`code ${key}`,value:topCode[key]})
+ }
+//  console.log('topCode',topCode)
 
   const totalCB = chargebacks.length
   const projectedSavings = inProcessChargebacks.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) * (65 / 100)
@@ -144,7 +179,9 @@ export const getDashboardData = tryCatch(async (req, res) => {
       LostRevenueAndFines: lostRevenueAndFines,
       clients: client,
       merchants:merchant,
-      dbas:dba
+      dbas:dba,
+      countryData:countryData,
+      topCbCode:topCodeData
     }
   });
 
