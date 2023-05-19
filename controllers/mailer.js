@@ -3,9 +3,8 @@ import tryCatch from './utils/tryCatch.js';
 
 
 export const sendMail = async(req, res) =>{
-  await mail()
-
-
+  // console.log("reqSend",req.body);
+  await mail(req.body)
     res.status(200).json({ 
         success: true, 
         // result: chargebacks, 

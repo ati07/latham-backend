@@ -162,7 +162,8 @@ export const getDashboardData = tryCatch(async (req, res) => {
   const avoidedChargebacks = ethoca.length + rdr.length
   //   console.log("wonChargebacks",wonChargebacks,totalWonChargebacks)
   res.status(200).json({
-    success: true, result: {
+    success: true, 
+    result: {
       RevenueSavings: totalWonChargebacks,
       AvoidedFines: avoidedFines,
       AvoidedChargebacks: avoidedChargebacks,

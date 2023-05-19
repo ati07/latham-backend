@@ -19,8 +19,14 @@ export const createDBA = tryCatch(async (req, res) => {
     visa_bin,
     mc_bin,
     mid,
-    etocastatus,
-    ethocalimit } = req.body;
+    ethocalimit,
+    arn,
+    activate_rdr,
+    activate_ethoca,
+    mid_status,
+    processing_limi,
+    ethocastatus,
+    mastercard_bin } = req.body;
     // console.log("object",req.body);
   const newDBA = new DBA({ 
     ...req.body.data,
@@ -38,8 +44,14 @@ export const createDBA = tryCatch(async (req, res) => {
     visa_bin,
     mc_bin,
     mid,
-    etocastatus,
-    ethocalimit });
+    ethocalimit,
+    arn,
+    activate_rdr,
+    activate_ethoca,
+    mid_status,
+    processing_limi,
+    ethocastatus,
+    mastercard_bin });
   await newDBA.save();
   res.status(201).json({ success: true, result: newDBA });
 });

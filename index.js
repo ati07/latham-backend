@@ -14,6 +14,8 @@ import { updateChargebackStatus } from './controllers/cron.js';
 import cron from 'node-cron'
 import dbaRouter from './routes/dbaRouter.js';
 import { sendMail } from './controllers/mailer.js';
+import riskReportRouter from './routes/riskreportRouter.js';
+import sendMailRouter from './routes/sendMailRouter.js';
 // var cron = require('node-cron');
 
 cron.schedule('* 23 * * *', () => {
@@ -48,11 +50,15 @@ app.use('/rdr',rdrRouter)
 app.use('/ethoca',ethocaRouter)
 app.use('/chargebacks',chargebacksRouter)
 app.use('/getdashboard',dashboardRouter)
+app.use('/getriskreport',riskReportRouter)
 app.use('/updatestatus',cronRouter)
+app.use('/sendmail',sendMailRouter)
 
 app.use('/room', roomRouter);
 app.get('/', (req, res) => res.json({ message: 'Welcome to our API' }));
-app.get('/sendmail',sendMail)
+// app.get('/sendmail',sendMail)
+
+
 app.use((req, res) =>
   res.status(404).json({ success: false, message: 'Not Found' })
 );

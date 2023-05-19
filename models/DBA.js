@@ -20,8 +20,14 @@ const DBASchema = mongoose.Schema(
     visa_bin: { type: String },
     mc_bin: { type: String },
     mid: { type: String },
-    etocastatus: { type: String },
-    ethocalimit: { type: String }
+    ethocalimit: { type: String },
+    arn: { type: String },
+    activate_rdr: { type: String },
+    activate_ethoca: { type: String },
+    mid_status: { type: String },
+    processing_limit:{ type: String },
+    ethocastatus: { type: String },
+    mastercard_bin: { type: String },
 },
     { timestamps: true }
 )
