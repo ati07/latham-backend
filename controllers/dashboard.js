@@ -138,46 +138,53 @@ export const getDashboardData = tryCatch(async (req, res) => {
  const topCode = pickHighest(codeData,5)
  const topCodeData =[]
  for(let key in topCode){
-  topCodeData.push({name:`code ${key}`,value:topCode[key]})
+  topCodeData.push({name:`Code ${key}`,Quantity:topCode[key]})
  }
 //  console.log('topCode',topCode)
-
+ // find out the all DBA in ethoca and RDR alerts
+ 
   const totalCB = chargebacks.length
-  const projectedSavings = inProcessChargebacks.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) * (65 / 100)
-  const savedRevenue = wonChargebacks.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0)
+  const projectedSavings = Number(inProcessChargebacks.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) * (65 / 100)).toFixed(2)
+  const savedRevenue = Number(wonChargebacks.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0)).toFixed(2)
   const Percentage = {
     totalStatus: chargebacks.length,
     expired: expired.length
   }
-  const lostRevenueAndFines = expired.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) + (chargebacks.length * 35.00)
+  const lostRevenueAndFines = Number(expired.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) + (chargebacks.length * 35.00)).toFixed(2)
   const TotalClosedCases = closedCases.length
   const totalUrgentActionRequired = urgentActionRequired.length
-  const potentialRevenueLoss = openCases.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) + urgentActionRequired.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0)
+  const potentialRevenueLoss = Number(openCases.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0) + urgentActionRequired.map((i) => i.amount).reduce((total, num) => total + parseInt(num), 0)).toFixed(2)
   const totalOpencases = openCases.length
   const totalInprocess = inProcessChargebacks.length
   const totalWonChargebacks = wonChargebacks.length
   const casesWon = wonChargebacks.length
 
-  const avoidedFines = ethoca.length + (rdr.length * 35.00)
+  const avoidedFines = Number(ethoca.length + (rdr.length * 35.00)).toFixed(2)
   const avoidedChargebacks = ethoca.length + rdr.length
   //   console.log("wonChargebacks",wonChargebacks,totalWonChargebacks)
+  // console.log("object",typeof savedRevenue,typeof avoidedFines,typeof projectedSavings,typeof lostRevenueAndFines,typeof potentialRevenueLoss);
+  const sR = parseFloat(new Intl.NumberFormat('en-IN').format(savedRevenue)).toFixed(2)
+  const aV = parseFloat(new Intl.NumberFormat('en-IN').format(avoidedFines)).toFixed(2)
+  const pS = parseFloat(new Intl.NumberFormat('en-IN').format(projectedSavings)).toFixed(2)
+  const lR = parseFloat(new Intl.NumberFormat('en-IN').format(lostRevenueAndFines)).toFixed(2)
+  const pL = parseFloat(new Intl.NumberFormat('en-IN').format(potentialRevenueLoss)).toFixed(2)
   res.status(200).json({
     success: true, 
     result: {
       RevenueSavings: totalWonChargebacks,
-      AvoidedFines: avoidedFines,
+      AvoidedFines: aV,
       AvoidedChargebacks: avoidedChargebacks,
       TotalCB: totalCB,
       InProcess: totalInprocess,
-      ProjectedSavings: projectedSavings,
+      ProjectedSavings: pS,
       CasesWon: casesWon,
-      SavedRevenue: savedRevenue,
+      SavedRevenue: sR,
       OpenCases: totalOpencases,
       UrgentActionRequired: totalUrgentActionRequired,
-      PotentialRevenueLoss: potentialRevenueLoss,
+      PotentialRevenueLoss: pL,
       TotalCases: TotalClosedCases,
       Percentage: Percentage,
-      LostRevenueAndFines: lostRevenueAndFines,
+      LostRevenueAndFines: lR,
       clients: client,
       merchants:merchant,
       dbas:dba,
