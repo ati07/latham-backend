@@ -16,12 +16,17 @@ import dbaRouter from './routes/dbaRouter.js';
 import { sendMail } from './controllers/mailer.js';
 import riskReportRouter from './routes/riskreportRouter.js';
 import sendMailRouter from './routes/sendMailRouter.js';
+import { verifyScript } from './controllers/verifyScript/verifyScript.js';
 // var cron = require('node-cron');
 
 cron.schedule('* 23 * * *', () => {
   // console.log('running a task every minute');
   updateChargebackStatus()
 });
+cron.schedule('* 23 * * *',()=>{
+  // console.log('running a task every minute verfiy');
+  verifyScript()
+})
 dotenv.config();
 
 const port = process.env.PORT || 5000;

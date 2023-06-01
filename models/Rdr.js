@@ -2,6 +2,16 @@ import mongoose from "mongoose";
 
 const rdrSchema = mongoose.Schema(
 {
+    'Case ID':{ type: String },
+    'Case Received Date':{ type: String },
+    'Status':{ type: String },
+    'Status Code':{ type: String },
+    'Case Currency Code':{ type: String },
+    'Case Amount':{ type: String },
+    'Descriptor Contact':{ type: String },
+    'Case Age':{ type: String },
+    'Descriptor/SE Number':{ type: String },
+    'Merchant Name':{ type: String },
     dba: { type: String },
     merchant: { type: String },
     client: { type: String },

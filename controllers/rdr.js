@@ -32,7 +32,15 @@ import tryCatch from './utils/tryCatch.js';
 //   card_last_four,
 // }
 export const createRdr = tryCatch(async (req, res) => {
-  const { id: uid, 
+  const { id: uid,
+    CaseID,
+    CaseReceivedDate,
+    status,
+    StatusCode,
+    CaseCurrencyCode,
+    CaseAmount,
+    DescriptorContact,
+    CaseAge, 
     dba,
     merchant,
     client,
@@ -62,6 +70,14 @@ export const createRdr = tryCatch(async (req, res) => {
     card_last_four,
    } = req.body;
   const newrdr = new Rdr({
+    CaseID,
+    CaseReceivedDate,
+    status,
+    StatusCode,
+    CaseCurrencyCode,
+    CaseAmount,
+    DescriptorContact,
+    CaseAge, 
     dba,
     merchant,
     client,
