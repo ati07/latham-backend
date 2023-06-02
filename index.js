@@ -19,12 +19,12 @@ import sendMailRouter from './routes/sendMailRouter.js';
 import { verifyScript } from './controllers/verifyScript/verifyScript.js';
 // var cron = require('node-cron');
 
-cron.schedule('* 23 * * *', () => {
+cron.schedule('59 23 * * *', () => {
   // console.log('running a task every minute');
   updateChargebackStatus()
 });
-cron.schedule('* * * * *',()=>{
-  console.log('running a task every minute verfiy');
+cron.schedule('45 23 * * *',()=>{
+  // console.log('running a task every minute verfiy');
   verifyScript()
 })
 dotenv.config();

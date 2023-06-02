@@ -48,7 +48,7 @@ export async function verifyScript() {
     await page.click('#custom-list-item-0-5');
     await page.waitForSelector("//html/body/div[1]/div[2]/div/div[2]/main/div[2]/div[1]/div[1]/div/div/div/div[2]/div[3]/div/fieldset/div/div[2]/div/div/div[1]/div/div[1]/div/div/div/div/input");
 
-    // await page.fill('//html/body/div[1]/div[2]/div/div[2]/main/div[2]/div[1]/div[1]/div/div/div/div[2]/div[3]/div/fieldset/div/div[2]/div/div/div[1]/div/div[1]/div/div/div/div/input', dateFormate(new Date(),'MM/DD/YYYY'))
+    await page.fill('//html/body/div[1]/div[2]/div/div[2]/main/div[2]/div[1]/div[1]/div/div/div/div[2]/div[3]/div/fieldset/div/div[2]/div/div/div[1]/div/div[1]/div/div/div/div/input', dateFormate(new Date(),'MM/DD/YYYY'))
     await page.dblclick('#main > div:nth-child(3) > div:nth-child(1) > div.css-6x9632-CSS-CSS > div > div > div > div.css-zn1cdn-structPadding-structPadding-structPadding > div > div > button.vds-btn-text--primary.css-118k6bc-smallViewportStyles-highContrastStyles-highContrastStyles-structMargin-structMargin')
     try {
         console.log("Try Starting.....");
@@ -66,7 +66,7 @@ export async function verifyScript() {
         await page.on('download', async (download) => {
             await download.saveAs('verifyData.xlsx')
             download.path().then(async (res) => {
-                console.log('res', res)
+                // console.log('res', res)
                 // Reading our test file
                 const file = reader.readFile('./verifyData.xlsx')
 
@@ -83,7 +83,7 @@ export async function verifyScript() {
                 }
 
                 // Printing data
-                console.log("dataverify", data)
+                // console.log("dataverify", data)
                 await Rdr.insertMany(data).then(function () {
                     console.log("Data inserted")  // Success
                 }).catch(function (error) {
