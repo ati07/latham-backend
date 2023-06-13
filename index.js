@@ -17,6 +17,7 @@ import { sendMail } from './controllers/mailer.js';
 import riskReportRouter from './routes/riskreportRouter.js';
 import sendMailRouter from './routes/sendMailRouter.js';
 import { verifyScript } from './controllers/verifyScript/verifyScript.js';
+import { midgatorApi } from './API Integration/Midigator Integration/midigatorApi.js';
 // var cron = require('node-cron');
 
 cron.schedule('59 23 * * *', () => {
@@ -63,6 +64,7 @@ app.use('/room', roomRouter);
 app.get('/', (req, res) => res.json({ message: 'Welcome to our API' }));
 // app.get('/sendmail',sendMail)
 
+app.post('/midigator_ethoca_alert',midgatorApi)
 
 app.use((req, res) =>
   res.status(404).json({ success: false, message: 'Not Found' })
