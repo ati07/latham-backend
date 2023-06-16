@@ -24,7 +24,7 @@ cron.schedule('59 23 * * *', () => {
   // console.log('running a task every minute');
   updateChargebackStatus()
 });
-cron.schedule('5 * * * *',()=>{
+cron.schedule('*/5 * * * *',()=>{
   console.log('running a task every minute verfiy45 23');
   verifyScript()
 })
