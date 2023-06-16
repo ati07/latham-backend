@@ -24,8 +24,8 @@ cron.schedule('59 23 * * *', () => {
   // console.log('running a task every minute');
   updateChargebackStatus()
 });
-cron.schedule('* * * * *',()=>{
-  // console.log('running a task every minute verfiy'45 23);
+cron.schedule('2 * * * *',()=>{
+  console.log('running a task every minute verfiy45 23');
   verifyScript()
 })
 dotenv.config();
