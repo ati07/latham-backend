@@ -23,7 +23,22 @@ export const createEthoca = tryCatch(async (req, res) => {
     alert_type,
     alert_date_time,
     amount,
-    cb_code } = req.body;
+    cb_code,
+    card_first_6,
+    card_last_4,
+    currency,
+    event_guid,
+    event_timestamp,
+    event_type,
+    merchant_descriptor,
+    prevention_case_number,
+    prevention_guid,
+    prevention_timestamp,
+    prevention_type,
+    transaction_timestamp
+  
+  
+  } = req.body;
   const newEthoca = new Ethoca({ dba,merchant,
     client,
     descriptor,
@@ -42,7 +57,20 @@ export const createEthoca = tryCatch(async (req, res) => {
     alert_type,
     alert_date_time,
     amount,
-    cb_code });
+    cb_code,
+    card_first_6,
+    card_last_4,
+    currency,
+    event_guid,
+    event_timestamp,
+    event_type,
+    merchant_descriptor,
+    prevention_case_number,
+    prevention_guid,
+    prevention_timestamp,
+    prevention_type,
+    transaction_timestamp
+  });
   await newEthoca.save();
   res.status(201).json({ success: true, result: newEthoca });
 });

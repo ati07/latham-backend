@@ -36,11 +36,13 @@ export async function verifyScript() {
     await page.waitForTimeout(5000);
     await page.fill('input#orgId', 'chargebackprolatamincpid');
     await page.fill('input#username', 'jeankra');
-    await page.fill('input#password', 'Panama2023!');
+    await page.fill('input#password', 'Panama!2023');
     await page.click('button[type=submit]');
     await page.waitForSelector('div.vds-input-bar');
     await page.waitForTimeout(5000);
     await page.goto('https://verifi-one.visa.com/vdm/app/vdmCaseActivity');
+    try {
+        console.log("Try Starting.....");
     await page.waitForSelector('button.vds-btn-icon.vds-btn-icon--light-tiny.css-1pf6dds');
     await page.click('#main > div:nth-child(3) > div:nth-child(1) > div.css-6x9632-CSS-CSS > div > div > div > div.css-xa13nd-CSS-CSS-structPadding-dark > div.css-1f6bywb-CSS-CSS > div > div:nth-child(3) > div > div:nth-child(1) > div > div > div > button')
     await page.waitForSelector('#custom-list-item-0-5');
@@ -50,8 +52,8 @@ export async function verifyScript() {
 
     await page.fill('//html/body/div[1]/div[2]/div/div[2]/main/div[2]/div[1]/div[1]/div/div/div/div[2]/div[3]/div/fieldset/div/div[2]/div/div/div[1]/div/div[1]/div/div/div/div/input', dateFormate(new Date(),'MM/DD/YYYY'))
     await page.dblclick('#main > div:nth-child(3) > div:nth-child(1) > div.css-6x9632-CSS-CSS > div > div > div > div.css-zn1cdn-structPadding-structPadding-structPadding > div > div > button.vds-btn-text--primary.css-118k6bc-smallViewportStyles-highContrastStyles-highContrastStyles-structMargin-structMargin')
-    try {
-        console.log("Try Starting.....");
+    
+        
         await page.waitForSelector('//*[@id="template-main"]/div/div[1]/div[2]/div/button');
         await page.waitForTimeout(1000); // Add a delay here if necessary
         await page.click('//*[@id="template-main"]/div/div[1]/div[2]/div/button');
